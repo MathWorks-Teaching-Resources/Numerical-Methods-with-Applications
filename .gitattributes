@@ -1,5 +1,6 @@
 *.fig binary
 *.mat binary
+*.m binary
 *.mdl binary diff merge=mlAutoMerge
 *.mdlp binary
 *.mexa64 binary
