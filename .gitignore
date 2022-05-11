@@ -1,0 +1,7 @@
+# List of untracked files to ignore
+
+*/*.asv
+*.asv
+
+Data/allStorms.mat
+Data/allStorms.csv
