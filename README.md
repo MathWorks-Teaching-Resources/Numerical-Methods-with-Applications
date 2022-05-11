@@ -1,4 +1,5 @@
-# Numerical Methods with Applications [![View <File Exchange Title> on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/XXXX)
+# Numerical Methods with Applications 
+[![View Numerical-Methods-with-Applications on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/111490-numerical-methods-with-applications)
 **Curriculum Module**  
 _Created with R2021b. Compatible with R2021b and later releases._ 
 
