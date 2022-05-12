@@ -78,7 +78,7 @@ MATLAB&reg;, Symbolic Math Toolbox&trade;, Statistics and Machine Learning Toolb
 The license for this module is available in the [LICENSE.TXT](license.txt) file in this GitHub repository.
 
 ## Support ##
-Have any questions or feedback? Contact the <a href="mailto:onlineteaching@mathworks.com">MathWorks online teaching team.</a>
+The solutions are available upon instructor request. If you would like to request solutions or have a question, contact the <a href="mailto:onlineteaching@mathworks.com">MathWorks online teaching team.</a>
 
 # #
 _Copyright 2022 The MathWorks, Inc._
