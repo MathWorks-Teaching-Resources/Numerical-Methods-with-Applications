@@ -15,5 +15,6 @@ yApprox = nan(n+1,1);
 xApprox(1) = init;
 yApprox(1) = f(init);
 
+% Fill in the details of the implementation here
 
 end
