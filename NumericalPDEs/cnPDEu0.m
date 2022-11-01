@@ -1,4 +1,4 @@
-function u = cnPDE(u0,alpha,beta,tEnd,dx,gamma,L,t0)
+function u = cnPDEu0(u0,alpha,beta,tEnd,dx,gamma,L,t0)
 % Solve the 1D heat equation u_t = gamma*u_{xx} on a rod of length L
 %   using the Crank-Nicolson method
 %   u(t,0) = alpha(t)
