@@ -39,11 +39,11 @@ equation scripts, a student must be familiar with the concepts of partial deriva
 These scripts do not assume knowledge of analytic solutions to ordinary or partial differential equations. 
 
 ## Details ##
-**NavigationOverview.mlx** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NavigationOverview.mlx)
+**Navigation.mlx** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=HelperFunctions/Navigation.mlx)
 This script brings together links and short descriptions of the content in the recommended order of use.
 
 ## ##
-**Interpolation** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=interpolation.mlx)
+**Interpolation** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Interpolation/interpolation.mlx)
 This folder includes the interactive example script `interpolation.mlx` that guides students through building 
 their own data set(s) using `hand.mlx` and writing their own linear interpolation function and piecewise cubic 
 Hermite interpolation function. The laboratory script `trackStorms.mlx` allows students to apply the scripts 
@@ -56,7 +56,7 @@ they have created to interpolate the paths of tropical cyclones from NOAA data.
 - Demonstrate multiple solutions to an interpolation problem, even when interpolating by polynomials.
 
 ## ##
-**Derivatives** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=approximatingDerivatives.mlx)
+**Derivatives** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Derivatives/approximatingDerivatives.mlx)
 This folder includes the interactive example script `approximatingDerivatives.mlx` that introduces the 
 method of Taylor series approximation to create and analyze numerical approximations to derivatives of 
 different orders.
@@ -69,7 +69,7 @@ different orders.
 - Demonstrate how numerical derivatives can magnify approximation errors. 
 
 ## ##
-**Integrals** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=numericalIntegration.mlx)
+**Integrals** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalIntegration/numericalIntegration.mlx)
 This folder includes the interactive example script `numericalIntegration.mlx` that guides students 
 through building functions to compute forward and backward Euler method approximations, a 2-point 
 Gaussian approximation, and a Simpson's rule approximation. The laboratory script `measureLake.mlx` 
@@ -85,7 +85,7 @@ and realizing the complexities of numerically integrating from data.
 - Explain why higher-order approximations may not be appropriate in applications.
 
 ## ##
-**Ordinary Differential Equations** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=diffEqs.mlx)
+**Ordinary Differential Equations** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalODEs/diffEqs.mlx)
 This folder includes the interactive example script `diffEqs.mlx` that guides students through 
 implementing an Euler method solver and a four-step Runge-Kutta method solver, and comparing the 
 results of their implementations to the built-in solver `ode45`. The laboratory script 
@@ -99,7 +99,7 @@ more realistic models of a simple pendulum.
 - Implement a four-step Runge-Kutta method.
 
 ## ##
-**Partial Differential Equations** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=partialDiffEqs.mlx)
+**Partial Differential Equations** [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalPDEs/partialDiffEqs.mlx)
 This folder includes the interactive example script `partialDiffEqs.mlx` that guides students 
 through an exploration of explicit, implicit, and mixed methods for numerically solving 
 first-order ordinary differential equations. The activity script `implementExplicitSolver.mlx` 
