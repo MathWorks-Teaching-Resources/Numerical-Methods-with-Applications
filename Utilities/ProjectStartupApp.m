@@ -226,7 +226,7 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             % Create UIFigure and hide until all components are created
             app.UIFigure = uifigure('Visible', 'off');
             app.UIFigure.AutoResizeChildren = 'off';
-            app.UIFigure.Position = [100 100 276 430];
+            app.UIFigure.Position = [100 100 276 460];
             app.UIFigure.Name = 'MATLAB App';
             app.UIFigure.Resize = 'off';
             app.UIFigure.CloseRequestFcn = createCallbackFcn(app, @UIFigureCloseRequest, true);
@@ -234,7 +234,7 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             % Create TabGroup
             app.TabGroup = uitabgroup(app.UIFigure);
             app.TabGroup.AutoResizeChildren = 'off';
-            app.TabGroup.Position = [1 -29 276 460];
+            app.TabGroup.Position = [1 1 276 460];
 
             % Create WelcomeTab
             app.WelcomeTab = uitab(app.TabGroup);
@@ -334,7 +334,6 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             % Create StudentButton
             app.StudentButton = uibutton(app.TabReview, 'push');
             app.StudentButton.ButtonPushedFcn = createCallbackFcn(app, @StudentButtonPushed, true);
-            app.StudentButton.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
             app.StudentButton.FontSize = 18;
             app.StudentButton.FontColor = [0 0 0];
             app.StudentButton.Position = [64 80 150 40];
@@ -343,7 +342,6 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             % Create OtherButton
             app.OtherButton = uibutton(app.TabReview, 'push');
             app.OtherButton.ButtonPushedFcn = createCallbackFcn(app, @OtherButtonPushed, true);
-            app.OtherButton.BackgroundColor = [0.129411764705882 0.129411764705882 0.129411764705882];
             app.OtherButton.FontSize = 18;
             app.OtherButton.FontColor = [0 0 0];
             app.OtherButton.Position = [64 34 150 40];

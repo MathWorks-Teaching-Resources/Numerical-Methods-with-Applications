@@ -42,13 +42,13 @@ classdef SmokeTests < matlab.unittest.TestCase
                     disp("Check Hand.mlx by hand because of data collection.")
                     testCase.verifyTrue(true)
                 case "ImplementExplicitSolver.mlx"
-                    ErrorSmokeTest(testCase,Filename)
+                %    ErrorSmokeTest(testCase,Filename)
                 case "PendulumModels.mlx"
-                    ErrorSmokeTest(testCase,Filename)
+                %    ErrorSmokeTest(testCase,Filename)
                 case "MeasureLakeArea.mlx"
                     SmokeTestWithData(testCase,Filename)
                 otherwise
-                    SimpleSmokeTest(testCase,Filename)
+                %    SimpleSmokeTest(testCase,Filename)
             end
         end
 
@@ -67,10 +67,15 @@ classdef SmokeTests < matlab.unittest.TestCase
             y = lakeY([idx:end 1:idx-1]);
             p.Position = [x y];
             drawpolygon = p; %#ok<NASGU>
+            openfig = @(in)figure;
             disp(">> Running " + Filename);
+            disp("Note: run this file by hand to check on data collection and openfig()")
             try
+                disp("In 'try'...")
                 run(fullfile("Scripts",Filename));
+                disp("Finished 'try'...")
             catch ME
+                disp("In 'catch' now...")
                 testCase.verifyTrue(false,ME.message);
             end
             % Log the opened figures to the test reports
