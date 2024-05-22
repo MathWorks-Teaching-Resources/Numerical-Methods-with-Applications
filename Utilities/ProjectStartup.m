@@ -6,6 +6,7 @@ proj = currentProject;
 MoveFilesAround("R2023b","MainMenu.mlx",proj)
 MoveFilesAround("R2023b","README.mlx",proj)
 MoveFilesAround("R2024a","PendulumModels.mlx",proj)
+MoveFilesAround("R2023b","NumericalPDEs.mlx",proj)
 
 % %%  Example
 % % To move ScriptName.mlx from a folder on the project path into
