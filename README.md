@@ -1,4 +1,3 @@
-
 # <span style="color:rgb(213,80,0)">Numerical Methods with Applications</span>
 
 
