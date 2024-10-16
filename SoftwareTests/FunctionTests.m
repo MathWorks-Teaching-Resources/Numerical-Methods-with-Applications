@@ -1,7 +1,7 @@
 classdef FunctionTests < matlab.unittest.TestCase
 
     properties (ClassSetupParameter)
-        Project = {''};
+        Project = {currentProject()};
     end
     methods (TestClassSetup)
 

@@ -1,0 +1,12 @@
+Name,Passed,Failed,Incomplete,Duration,Details
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=Hand.mlx),1,0,0,1.0933756,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=ImplementExplicitSolver.mlx),1,0,0,0.0002897,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=Interpolation.mlx),1,0,0,0.0004386,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=MeasureLakeArea.mlx),1,0,0,26.1523377,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=NumericalDerivatives.mlx),1,0,0,0.0012912,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=NumericalIntegration.mlx),1,0,0,1.72e-05,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=NumericalODEs.mlx),1,0,0,9.6e-06,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=NumericalPDEs.mlx),1,0,0,7.9e-06,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=PendulumModels.mlx),1,0,0,0.0001478,
+SmokeTests[Project=0x0_char]/SmokeRun(Scripts=TrackStorms.mlx),1,0,0,0.3293405,
+FunctionTests[Project=0x0_char]/dataExists,1,0,0,0.0193367,

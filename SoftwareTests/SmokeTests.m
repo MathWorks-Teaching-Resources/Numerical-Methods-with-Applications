@@ -1,185 +1,151 @@
 classdef SmokeTests < matlab.unittest.TestCase
 
+    properties
+        RootFolder
+        sparedEditors % Files already open when the test starts
+    end % properties
+    
     properties (ClassSetupParameter)
-        Project = {''};
-    end
+        Project = {currentProject()};
+    end % ClassSetupParameter
 
     properties (TestParameter)
-        Scripts;
-    end
+        File;
+    end % TestParameter
 
     methods (TestParameterDefinition,Static)
 
-        function Scripts = GetScriptName(Project)
+        function File = RetrieveFile(Project) %#ok<INUSD>
+            % Retrieve student template files:
             RootFolder = currentProject().RootFolder;
-            Scripts = dir(fullfile(RootFolder,"Scripts","*.mlx"));
-            Scripts = {Scripts.name};
+            File = dir(fullfile(RootFolder,"Scripts","*.mlx"));
+            File = {File.name}; 
         end
 
-    end
+    end % Static TestParameterDefinition
 
     methods (TestClassSetup)
 
-        function SetUpSmokeTest(testCase,Project)
-            try
-                currentProject;
-            catch ME
-                warning("Project is not loaded.")
-            end
+        function SetUpSmokeTest(testCase,Project) %#ok<INUSD>
+            % Navigate to project root folder:
+            testCase.RootFolder = Project.RootFolder;
+            cd(testCase.RootFolder)
+            
+            % Close the StartUp app if still open:
+            delete(findall(groot,'Name','StartUp App'))
+
+            % Log MATLAB version:
+            testCase.log("Running in " + version)
         end
 
+    end % TestClassSetup
 
-    end
-
-
+    methods(TestMethodSetup)
+        function recordEditorsToSpare(testCase)
+            testCase.sparedEditors = matlab.desktop.editor.getAll;
+            testCase.sparedEditors = {testCase.sparedEditors.Filename};
+        end
+    end % TestMethodSetup
+    
+    methods(TestMethodTeardown)
+        function closeOpenedEditors_thenDeleteWorkingDir(testCase)
+            openEditors = matlab.desktop.editor.getAll;
+            for editor=openEditors(1:end)
+                if any(strcmp(editor.Filename, testCase.sparedEditors))
+                    continue;
+                end
+                % if not on our list, close the file
+                editor.close();
+            end
+        end
+    end % TestMethodTeardown
 
     methods(Test)
 
-        function SmokeRun(testCase,Scripts)
-            Filename = string(Scripts);
-            switch (Filename)
-                case "Hand.mlx"
-                    disp("Check Hand.mlx by hand because of data collection.")
-                    testCase.verifyTrue(true)
-                case "ImplementExplicitSolver.mlx"
-                %    ErrorSmokeTest(testCase,Filename)
-                case "PendulumModels.mlx"
-                %    ErrorSmokeTest(testCase,Filename)
-                case "MeasureLakeArea.mlx"
-                    SmokeTestWithData(testCase,Filename)
-                otherwise
-                %    SimpleSmokeTest(testCase,Filename)
-            end
-        end
+        function SmokeRun(testCase,File)
 
-    end
+            % Navigate to project root folder:
+            cd(testCase.RootFolder)
+            FileToRun = string(File);
+
+            % Pre-test:
+            PreFiles = CheckPreFile(testCase,FileToRun);
+            run(PreFiles);
+
+            % Run SmokeTest
+            disp(">> Running " + FileToRun);
+            try
+                run(fullfile("Scripts",FileToRun));
+            catch ME 
+                
+            end
+
+            % Post-test:
+            PostFiles = CheckPostFile(testCase,FileToRun);
+            run(PostFiles)
+
+            % Log every figure created during run:
+            Figures = findall(groot,'Type','figure');
+            Figures = flipud(Figures);
+            if ~isempty(Figures)
+                for f = 1:size(Figures,1)
+                    if ~isempty(Figures(f).Number)
+                        FigDiag = matlab.unittest.diagnostics.FigureDiagnostic(Figures(f),'Formats','png');
+                        log(testCase,1,FigDiag);
+                    end
+                end
+            end
+
+            % Close all figures and Simulink models
+            close all force
+            if any(matlab.addons.installedAddons().Name == "Simulink")
+                bdclose all
+            end
+
+            % Rethrow error if any
+            if exist("ME","var")
+                if ~any(strcmp(ME.identifier,KnownIssuesID))
+                    rethrow(ME)
+                end
+            end
+
+        end
+            
+    end % Test Methods
 
 
     methods (Access = private)
 
-        function SmokeTestWithData(testCase,Filename)
-            % Run the Smoke test
-            RootFolder = currentProject().RootFolder;
-            cd(RootFolder)
-            load lakeData.mat lakeX lakeY
-            [~,idx] = max(diff(lakeX));
-            x = lakeX([idx:end 1:idx-1]);
-            y = lakeY([idx:end 1:idx-1]);
-            p.Position = [x y];
-            drawpolygon = p; %#ok<NASGU>
-            openfig = @(in)figure;
-            disp(">> Running " + Filename);
-            disp("Note: run this file by hand to check on data collection and openfig()")
-            try
-                disp("In 'try'...")
-                run(fullfile("Scripts",Filename));
-                disp("Finished 'try'...")
-            catch ME
-                disp("In 'catch' now...")
-                testCase.verifyTrue(false,ME.message);
+       function Path = CheckPreFile(testCase,Filename)
+            PreFile = "Pre"+replace(Filename,".mlx",".m");
+            PreFilePath = fullfile(testCase.RootFolder,"SoftwareTests","PreFiles",PreFile);
+            if ~isfolder(fullfile(testCase.RootFolder,"SoftwareTests/PreFiles"))
+                mkdir(fullfile(testCase.RootFolder,"SoftwareTests/PreFiles"))
             end
-            % Log the opened figures to the test reports
-            Figures = findall(groot,'Type','figure');
-            Figures = flipud(Figures);
-            if ~isempty(Figures)
-                for f = 1:size(Figures,1)
-                    FigDiag = matlab.unittest.diagnostics.FigureDiagnostic(Figures(f));
-                    log(testCase,1,FigDiag);
-                end
+            if ~isfile(PreFilePath)
+                writelines("%  Pre-run script for "+Filename,PreFilePath)
+                writelines("% ---- Known Issues     -----",PreFilePath,'WriteMode','append');
+                writelines("KnownIssuesID = "+char(34)+char(34)+";",PreFilePath,'WriteMode','append');
+                writelines("% ---- Pre-run commands -----",PreFilePath,'WriteMode','append');
+                writelines(" ",PreFilePath,'WriteMode','append');
             end
-            close all
-
+            Path = PreFilePath;
         end
 
-
-        function ErrorSmokeTest(testCase,Filename)
-
-            % Run the Smoke test
-            RootFolder = currentProject().RootFolder;
-            cd(RootFolder)
-            disp(">> Running " + Filename);
-            try
-                flag = 0;
-                run(fullfile("Scripts",Filename));
-            catch ME
-                MEFlag = 1;
-                switch Filename
-                    case "PendulumModels.mlx"
-                        if string(ME.identifier) == "MATLAB:unassignedOutputs"
-                            flag = flag+1;
-                            switch flag
-                                case 1
-                                    [t2,theta2] = ode45(@(t,theta) model2t(t,theta,L,g),[t0 tEnd],[theta0 omega0]);
-                                case 2
-                                    [t3,theta3] = ode45(@(t,theta) model3t(t,theta,L,g,M,b,c),[t0 tEnd],[theta0 omega0]);
-                                case 3
-                                    [t4,theta4] = ode45(@(t,theta) model4t(t,theta,L,g,M,m,b,c),[t0 tEnd],[theta0 omega0]);
-                            end
-                        else
-                            MEFlag = 0;
-                        end
-                    case "ImplementExplicitSolver.mlx"
-                        if string(ME.message) == "Index in position 1 exceeds array bounds."
-                            disp("Expected error")
-                        else
-                            MEFlag = 0;
-                        end
-                    otherwise
-                        testCase.verifyTrue(false,"Unexpected file in ErrorSmokeTest")
-                end
-
-                if MEFlag == 0
-                    testCase.verifyTrue(false,ME.message);
-                end
+        function Path = CheckPostFile(testCase,Filename)
+            PostFile = "Post"+replace(Filename,".mlx",".m");
+            PostFilePath = fullfile(testCase.RootFolder,"SoftwareTests","PostFiles",PostFile);
+            if ~isfolder(fullfile(testCase.RootFolder,"SoftwareTests/PostFiles"))
+                mkdir(fullfile(testCase.RootFolder,"SoftwareTests/PostFiles"))
             end
-
-            % Log the opened figures to the test reports
-            Figures = findall(groot,'Type','figure');
-            Figures = flipud(Figures);
-            if ~isempty(Figures)
-                for f = 1:size(Figures,1)
-                    FigDiag = matlab.unittest.diagnostics.FigureDiagnostic(Figures(f));
-                    log(testCase,1,FigDiag);
-                end
+            if ~isfile(PostFilePath)
+                writelines("%  Post-run script for "+Filename,PostFilePath)
+                writelines("% ---- Post-run commands -----",PostFilePath,'WriteMode','append');
+                writelines(" ",PostFilePath,'WriteMode','append');
             end
-            close all
-
+            Path = PostFilePath;
         end
 
+    end % Private Methods
 
-        function SimpleSmokeTest(testCase,Filename)
-
-            % Run the Smoke test
-            RootFolder = currentProject().RootFolder;
-            cd(RootFolder)
-            disp(">> Running " + Filename);
-            try
-                run(fullfile("Scripts",Filename));
-            catch ME
-                testCase.verifyTrue(false,ME.message);
-            end
-
-            % Log the opened figures to the test reports
-            Figures = findall(groot,'Type','figure');
-            Figures = flipud(Figures);
-            if ~isempty(Figures)
-                for f = 1:size(Figures,1)
-                    FigDiag = matlab.unittest.diagnostics.FigureDiagnostic(Figures(f));
-                    log(testCase,1,FigDiag);
-                end
-            end
-            close all
-
-        end
-
-    end
-
-    methods (TestClassTeardown)
-
-        function closeAllFigure(testCase)
-            close all force  % Close figure windows
-        end
-
-    end % methods (TestClassTeardown)
-
-end
+end % Smoketests

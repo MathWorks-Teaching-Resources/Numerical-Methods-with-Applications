@@ -24,42 +24,30 @@ smoke-test:
     # Make sure that the runner you plan to use matches the tags
       - matlab
     stage: test
+    parallel:
+      matrix:
+        - VERSION: [R2024a,R2024b]
     script: 
-      - matlab -batch "openProject(pwd);RunAllTests(true)"
+      - Set-Alias -Name matlab -Value "C:\Program Files\MATLAB\$VERSION\bin\matlab.exe"
+      - matlab -batch "openProject(pwd);RunAllTests"
     when: always
     allow_failure: true
     artifacts:
+      name: "$VERSION"
       paths:
         - public/*
-      expire_in: 1 years
+      when:  always
+
 
 pages:
     tags:
       - matlab
     stage: deploy
     script:
-      - echo 'Deploying pages'
+      - matlab -batch "openProject(pwd);PostSmokeTest;"
     artifacts:
         paths:
             - public
-
-smoke-test-solution:
-    tags:
-      - matlab
-    stage: release
-    script: 
-      - matlab -batch "proj = openProject(pwd); 
-        addpath(genpath(proj.RootFolder));
-        results = runtests(fullfile('InternalFiles','Tests','CI','SolnSmokeTests.m'));
-        disp(table(results)); assertSuccess(results);"
-    rules:
-# This test should always run when merging to main
-# And be available for manual running on any push
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
-        when: always
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
-        when: manual
-    allow_failure: true
         
 file-test:   
     tags:
@@ -87,6 +75,7 @@ release-testing:
       - matlab -batch "proj = openProject(pwd); 
         cd ..;
         addpath(genpath(fullfile('utilities','TestingResources')));
+        addpath(genpath(fullfile('utilities','Tools')));
         runCMTests"
     rules:
 # This test should always run when merging to main

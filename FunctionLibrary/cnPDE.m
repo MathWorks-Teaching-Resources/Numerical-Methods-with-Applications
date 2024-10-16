@@ -69,11 +69,7 @@ for j = 1:(tEnd/dt)
     % To visualize the outputs
     hold on
     delete(ax.Children(1:end-1));
-    try
-        plot(xVals,[alpha(j*dt);u;beta(j*dt)],LineWidth=1,SeriesIndex="none")
-    catch % If using R2023a or earlier
-        plot(xVals,[alpha(j*dt);u;beta(j*dt)],"k",LineWidth=1)
-    end
+    plot(xVals,[alpha(j*dt);u;beta(j*dt)],LineWidth=1,SeriesIndex="none")
     subtitle("$t = $"+dt*j)
     drawnow
     pause(0.1)     

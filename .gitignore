@@ -52,8 +52,5 @@ Data/allStorms.csv
 Scripts/myLakeData.mat
 myLakeData.mat
 
-# Test results
-SoftwareTests/TestResults_*
-
 # GitLab page folder
 public/

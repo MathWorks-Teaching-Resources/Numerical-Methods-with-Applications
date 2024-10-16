@@ -2,29 +2,27 @@ classdef ProjectStartupApp < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
-        UIFigure        matlab.ui.Figure
-        TabGroup        matlab.ui.container.TabGroup
-        WelcomeTab      matlab.ui.container.Tab
-        Image           matlab.ui.control.Image
-        READMEButton    matlab.ui.control.Button
-        ReviewUsButton  matlab.ui.control.Button
-        MainMenuButton  matlab.ui.control.Button
-        WelcomeTitle    matlab.ui.control.Label
-        TabReview       matlab.ui.container.Tab
-        OtherButton     matlab.ui.control.Button
-        StudentButton   matlab.ui.control.Button
-        FacultyButton   matlab.ui.control.Button
-        Q1              matlab.ui.control.Label
-        ReviewTitle     matlab.ui.control.Label
-        ReviewText      matlab.ui.control.Label
+        StartUpAppUIFigure  matlab.ui.Figure
+        TabGroup            matlab.ui.container.TabGroup
+        WelcomeTab          matlab.ui.container.Tab
+        Image               matlab.ui.control.Image
+        READMEButton        matlab.ui.control.Button
+        ReviewUsButton      matlab.ui.control.Button
+        MainMenuButton      matlab.ui.control.Button
+        WelcomeTitle        matlab.ui.control.Label
+        TabReview           matlab.ui.container.Tab
+        OtherButton         matlab.ui.control.Button
+        StudentButton       matlab.ui.control.Button
+        FacultyButton       matlab.ui.control.Button
+        Q1                  matlab.ui.control.Label
+        ReviewTitle         matlab.ui.control.Label
+        ReviewText          matlab.ui.control.Label
     end
 
     
     properties (Access = private)
         GitHubOrganization = "MathWorks-Teaching-Resources"; % Description
         GitHubRepository = "Numerical-Methods-with-Applications";
-        localForegroundColor
-        localBackgroundColor
     end
 %% How to customize the app?    
 %{
@@ -99,31 +97,6 @@ classdef ProjectStartupApp < matlab.apps.AppBase
 
         % Code that executes after component creation
         function startupFcn(app)
-            app.localBackgroundColor = app.UIFigure.Color;
-            app.localForegroundColor = 1-app.localBackgroundColor;
-            if isMATLABReleaseOlderThan("R2024a")
-                hexBckgrndColor = app.localBackgroundColor;
-            else
-                hexBckgrndColor = rgb2hex(app.localBackgroundColor);
-            end
-            app.WelcomeTitle.FontColor = app.localForegroundColor;
-            app.READMEButton.FontColor = app.localForegroundColor;
-            app.READMEButton.BackgroundColor = hexBckgrndColor;
-            app.MainMenuButton.FontColor = app.localForegroundColor;
-            app.MainMenuButton.BackgroundColor = hexBckgrndColor;
-            app.ReviewUsButton.FontColor = app.localForegroundColor;
-            app.ReviewUsButton.BackgroundColor = hexBckgrndColor;
-            app.OtherButton.FontColor = app.localForegroundColor;
-            app.OtherButton.BackgroundColor = hexBckgrndColor;
-            app.StudentButton.FontColor = app.localForegroundColor;
-            app.StudentButton.BackgroundColor = hexBckgrndColor;
-            app.FacultyButton.FontColor = app.localForegroundColor;
-            app.FacultyButton.BackgroundColor = hexBckgrndColor;
-            app.ReviewTitle.FontColor = app.localForegroundColor;
-            app.ReviewText.FontColor = app.localForegroundColor;
-
-            % Move gui to center of screen
-            movegui(app.UIFigure,"center")
 
             % Switch tab to review if has not been reviewed yet
             if isfile(fullfile("Utilities","ProjectSettings.mat"))
@@ -156,14 +129,14 @@ classdef ProjectStartupApp < matlab.apps.AppBase
                 Request.Header    = HeaderField("X-GitHub-Api-Version","2022-11-28");
                 Request.Header(2) = HeaderField("Accept","application/vnd.github+json");
                 [Answer,~,~] = send(Request,Address);
-                websave(fullfile("Utilities/SurveyLinks.mat"),Answer.Body.Data.download_url)
+                websave(fullfile("Utilities/SurveyLinks.mat"),Answer.Body.Data.download_url);
             catch
             end
 
         end
 
-        % Close request function: UIFigure
-        function UIFigureCloseRequest(app, event)
+        % Close request function: StartUpAppUIFigure
+        function StartUpAppUIFigureCloseRequest(app, event)
             if event.Source == app.READMEButton
                 open README.mlx
             elseif event.Source == app.MainMenuButton
@@ -182,28 +155,28 @@ classdef ProjectStartupApp < matlab.apps.AppBase
 
         % Button pushed function: MainMenuButton
         function MainMenuButtonPushed(app, event)
-            UIFigureCloseRequest(app,event)
+            StartUpAppUIFigureCloseRequest(app,event)
         end
 
         % Button pushed function: FacultyButton
         function FacultyButtonPushed(app, event)
             app.pingSway;
             app.openFacultyForm;
-            UIFigureCloseRequest(app,event)
+            StartUpAppUIFigureCloseRequest(app,event)
         end
 
         % Button pushed function: StudentButton
         function StudentButtonPushed(app, event)
             app.pingSway;
             app.openStudentForm;
-            UIFigureCloseRequest(app,event)
+            StartUpAppUIFigureCloseRequest(app,event)
         end
 
         % Button pushed function: OtherButton
         function OtherButtonPushed(app, event)
             app.pingSway;
             app.openStudentForm;
-            UIFigureCloseRequest(app,event)
+            StartUpAppUIFigureCloseRequest(app,event)
         end
 
         % Button pushed function: ReviewUsButton
@@ -213,7 +186,7 @@ classdef ProjectStartupApp < matlab.apps.AppBase
 
         % Button pushed function: READMEButton
         function READMEButtonPushed(app, event)
-            UIFigureCloseRequest(app,event)
+            StartUpAppUIFigureCloseRequest(app,event)
         end
     end
 
@@ -223,16 +196,16 @@ classdef ProjectStartupApp < matlab.apps.AppBase
         % Create UIFigure and components
         function createComponents(app)
 
-            % Create UIFigure and hide until all components are created
-            app.UIFigure = uifigure('Visible', 'off');
-            app.UIFigure.AutoResizeChildren = 'off';
-            app.UIFigure.Position = [100 100 276 460];
-            app.UIFigure.Name = 'MATLAB App';
-            app.UIFigure.Resize = 'off';
-            app.UIFigure.CloseRequestFcn = createCallbackFcn(app, @UIFigureCloseRequest, true);
+            % Create StartUpAppUIFigure and hide until all components are created
+            app.StartUpAppUIFigure = uifigure('Visible', 'off');
+            app.StartUpAppUIFigure.AutoResizeChildren = 'off';
+            app.StartUpAppUIFigure.Position = [100 100 276 430];
+            app.StartUpAppUIFigure.Name = 'StartUp App';
+            app.StartUpAppUIFigure.Resize = 'off';
+            app.StartUpAppUIFigure.CloseRequestFcn = createCallbackFcn(app, @StartUpAppUIFigureCloseRequest, true);
 
             % Create TabGroup
-            app.TabGroup = uitabgroup(app.UIFigure);
+            app.TabGroup = uitabgroup(app.StartUpAppUIFigure);
             app.TabGroup.AutoResizeChildren = 'off';
             app.TabGroup.Position = [1 1 276 460];
 
@@ -248,34 +221,27 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.WelcomeTitle.WordWrap = 'on';
             app.WelcomeTitle.FontSize = 24;
             app.WelcomeTitle.FontWeight = 'bold';
-            app.WelcomeTitle.FontColor = [0 0 0];
             app.WelcomeTitle.Position = [2 349 274 70];
             app.WelcomeTitle.Text = 'Numerical Methods with Applications';
 
             % Create MainMenuButton
             app.MainMenuButton = uibutton(app.WelcomeTab, 'push');
             app.MainMenuButton.ButtonPushedFcn = createCallbackFcn(app, @MainMenuButtonPushed, true);
-            app.MainMenuButton.BackgroundColor = [1 1 1];
             app.MainMenuButton.FontSize = 18;
-            app.MainMenuButton.FontColor = [0 0 0];
             app.MainMenuButton.Position = [59 96 161 35];
             app.MainMenuButton.Text = 'Main Menu';
 
             % Create ReviewUsButton
             app.ReviewUsButton = uibutton(app.WelcomeTab, 'push');
             app.ReviewUsButton.ButtonPushedFcn = createCallbackFcn(app, @ReviewUsButtonPushed, true);
-            app.ReviewUsButton.BackgroundColor = [1 1 1];
             app.ReviewUsButton.FontSize = 18;
-            app.ReviewUsButton.FontColor = [0 0 0];
             app.ReviewUsButton.Position = [59 10 161 35];
             app.ReviewUsButton.Text = 'Review Us';
 
             % Create READMEButton
             app.READMEButton = uibutton(app.WelcomeTab, 'push');
             app.READMEButton.ButtonPushedFcn = createCallbackFcn(app, @READMEButtonPushed, true);
-            app.READMEButton.BackgroundColor = [1 1 1];
             app.READMEButton.FontSize = 18;
-            app.READMEButton.FontColor = [0 0 0];
             app.READMEButton.Position = [59 53 161 35];
             app.READMEButton.Text = 'README';
 
@@ -296,9 +262,8 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.ReviewText.VerticalAlignment = 'top';
             app.ReviewText.WordWrap = 'on';
             app.ReviewText.FontSize = 18;
-            app.ReviewText.FontColor = [0 0 0];
             app.ReviewText.Position = [16 243 245 69];
-            app.ReviewText.Text = 'Plese help us improve your experience by answering a few questions.';
+            app.ReviewText.Text = 'Please help us improve your experience by answering a few questions.';
 
             % Create ReviewTitle
             app.ReviewTitle = uilabel(app.TabReview);
@@ -307,9 +272,8 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.ReviewTitle.WordWrap = 'on';
             app.ReviewTitle.FontSize = 24;
             app.ReviewTitle.FontWeight = 'bold';
-            app.ReviewTitle.FontColor = [0 0 0];
             app.ReviewTitle.Position = [2 326 274 93];
-            app.ReviewTitle.Text = 'Welcome to    Numerical Methods with Applications';
+            app.ReviewTitle.Text = 'Numerical Methods with Applications';
 
             % Create Q1
             app.Q1 = uilabel(app.TabReview);
@@ -318,16 +282,13 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.Q1.WordWrap = 'on';
             app.Q1.FontSize = 18;
             app.Q1.FontWeight = 'bold';
-            app.Q1.FontColor = [0 0 0];
             app.Q1.Position = [16 141 245 69];
-            app.Q1.Text = 'What describe you best?';
+            app.Q1.Text = 'What describes you best?';
 
             % Create FacultyButton
             app.FacultyButton = uibutton(app.TabReview, 'push');
             app.FacultyButton.ButtonPushedFcn = createCallbackFcn(app, @FacultyButtonPushed, true);
-            app.FacultyButton.BackgroundColor = [0.149 0.149 0.149];
             app.FacultyButton.FontSize = 18;
-            app.FacultyButton.FontColor = [0 0 0];
             app.FacultyButton.Position = [64 127 150 40];
             app.FacultyButton.Text = 'Faculty';
 
@@ -335,7 +296,6 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.StudentButton = uibutton(app.TabReview, 'push');
             app.StudentButton.ButtonPushedFcn = createCallbackFcn(app, @StudentButtonPushed, true);
             app.StudentButton.FontSize = 18;
-            app.StudentButton.FontColor = [0 0 0];
             app.StudentButton.Position = [64 80 150 40];
             app.StudentButton.Text = 'Student';
 
@@ -343,12 +303,11 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             app.OtherButton = uibutton(app.TabReview, 'push');
             app.OtherButton.ButtonPushedFcn = createCallbackFcn(app, @OtherButtonPushed, true);
             app.OtherButton.FontSize = 18;
-            app.OtherButton.FontColor = [0 0 0];
             app.OtherButton.Position = [64 34 150 40];
             app.OtherButton.Text = 'Other';
 
             % Show the figure after all components are created
-            app.UIFigure.Visible = 'on';
+            app.StartUpAppUIFigure.Visible = 'on';
         end
     end
 
@@ -362,7 +321,7 @@ classdef ProjectStartupApp < matlab.apps.AppBase
             createComponents(app)
 
             % Register the app with App Designer
-            registerApp(app, app.UIFigure)
+            registerApp(app, app.StartUpAppUIFigure)
 
             % Execute the startup function
             runStartupFcn(app, @startupFcn)
@@ -376,7 +335,7 @@ classdef ProjectStartupApp < matlab.apps.AppBase
         function delete(app)
 
             % Delete UIFigure when app is deleted
-            delete(app.UIFigure)
+            delete(app.StartUpAppUIFigure)
         end
     end
 end
