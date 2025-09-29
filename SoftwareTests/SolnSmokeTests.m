@@ -39,7 +39,8 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
         function File = GetScriptName(Project)
             % Retrieve student template files:
             RootFolder = Project.RootFolder;
-            File = dir(fullfile(RootFolder,"Scripts","*.mlx"));
+            File = dir(fullfile(RootFolder,"Scripts","*.m"));
+            File = [File; dir(fullfile(RootFolder,"Scripts","*.mlx"))];
             File = {File.name};
         end
 
@@ -55,7 +56,7 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
             % Check that solutions are on path:
             testCase.isSolnOnPath = isfolder("Solutions");
             if testCase.isSolnOnPath == 0
-                addpath(fullfile(testCase.RootFolder,"InstructorResources","Solutions"))
+                addpath(genpath(fullfile(testCase.RootFolder,"InstructorResources","Solutions")))
             end
 
             % Close the StartUp app if still open:
@@ -73,7 +74,7 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
         % Check that solutions files exist for each of the student
         % templates
         function ExistSolns(testCase,File)
-            SolutionName = replace(string(File),".mlx","Soln.mlx");
+            SolutionName = replace(string(File),".m","Soln.m");
             assert(exist(SolutionName,"file"),"Missing solutions for "+File);
         end
 
@@ -82,7 +83,7 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
 
             % Navigate to project root folder:
             cd(testCase.RootFolder)
-            FileToRun = replace(string(File),".mlx","Soln.mlx");
+            FileToRun = replace(string(File),".m","Soln.m");
 
             % Pre-test:
             PreFiles = CheckPreFile(testCase,FileToRun);
@@ -132,7 +133,7 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
     methods (Access = private)
 
         function Path = CheckPreFile(testCase,Filename)
-            PreFile = "Pre"+replace(Filename,".mlx",".m");
+            PreFile = "Pre"+extractBefore(Filename,".m")+".m";
             PreFilePath = fullfile(testCase.RootFolder,"SoftwareTests","PreFiles",PreFile);
             if ~isfolder(fullfile(testCase.RootFolder,"SoftwareTests/PreFiles"))
                 mkdir(fullfile(testCase.RootFolder,"SoftwareTests/PreFiles"))
@@ -148,7 +149,7 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
         end
 
         function Path = CheckPostFile(testCase,Filename)
-            PostFile = "Post"+replace(Filename,".mlx",".m");
+            PostFile = "Post"+extractBefore(Filename,".m")+".m";
             PostFilePath = fullfile(testCase.RootFolder,"SoftwareTests","PostFiles",PostFile);
             if ~isfolder(fullfile(testCase.RootFolder,"SoftwareTests/PostFiles"))
                 mkdir(fullfile(testCase.RootFolder,"SoftwareTests/PostFiles"))
@@ -162,5 +163,15 @@ classdef SolnSmokeTests < matlab.unittest.TestCase
         end
 
     end % Private Access Methods
+
+    methods (TestClassTeardown)
+
+        function ResetPath(testCase)
+            if ~testCase.isSolnOnPath && exist("Solutions","dir")
+                rmpath(genpath(fullfile(currentProject().RootFolder,"InstructorResources","Solutions")))
+            end
+        end
+
+    end % TestClassTeardown
 
 end % SolnSmokeTests

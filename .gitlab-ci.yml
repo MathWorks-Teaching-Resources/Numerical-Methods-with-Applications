@@ -5,83 +5,91 @@ stages:
   - deploy
   - release
 
-setup-job:
-    tags:
-      - matlab
-    stage: setup
-    script:
-      - cd ..
-      - if (test-path utilities) { rm -r -force utilities }
-      - git clone git@insidelabs-git.mathworks.com:modular-curriculum-content/utilities.git
-      - cd $CI_PROJECT_NAME 
-    allow_failure: false
+.setup_matlab_windows: &setup_matlab_windows
+  - $env:MLM_LICENSE_TOKEN="$LICENSEOWNER|$LICENSELABEL|$LICENSETOKEN" # Set the batch token license
+  - Set-Alias -Name matlab -Value "D:\MATLAB\$VERSION\bin\matlab-batch"
 
+setup-job:
+  tags:
+    - training
+    - windows
+  stage: setup
+  script:
+    - cd ..
+    - if (test-path utilities) { rm -r -force utilities }
+    - git clone https://insidelabs-git.mathworks.com/modular-curriculum-content/utilities.git
+    - cd $CI_PROJECT_NAME 
+  allow_failure: false
 
 smoke-test:
-# Smoke tests should run all the time
-    tags:
-    # Add additional tags like (e.g. - arduino) as required
-    # Make sure that the runner you plan to use matches the tags
-      - matlab
-    stage: test
-    parallel:
-      matrix:
-        - VERSION: [R2024a,R2024b]
-    script: 
-      - Set-Alias -Name matlab -Value "C:\Program Files\MATLAB\$VERSION\bin\matlab.exe"
-      - matlab -batch "openProject(pwd);RunAllTests"
-    when: always
-    allow_failure: true
-    artifacts:
-      name: "$VERSION"
-      paths:
-        - public/*
-      when:  always
-
+  parallel:
+    matrix:
+      - VERSION: [R2024b,R2025a,R2025b]
+  tags:
+    - training
+    - windows
+  stage: test
+  script: 
+    - *setup_matlab_windows
+    - matlab "openProject(pwd);RunAllTests"
+  when: always
+  allow_failure: true
+  artifacts:
+    name: "$VERSION"
+    paths:
+      - public/*
+    when:  always
 
 pages:
-    tags:
-      - matlab
-    stage: deploy
-    script:
-      - matlab -batch "openProject(pwd);PostSmokeTest;"
-    artifacts:
-        paths:
-            - public
+  variables:
+    VERSION: "R2025a"
+  tags:
+    - training
+    - windows
+  stage: deploy
+  script:
+    - *setup_matlab_windows
+    - matlab "openProject(pwd);PostSmokeTest;"
+  artifacts:
+    paths:
+      - public
         
 file-test:   
-    tags:
-      - matlab
-    stage: release
-    script: 
-      - matlab -batch "proj = openProject(pwd); 
-        addpath(proj.RootFolder+'/InternalFiles/Tests/CI');
-        results = runtests('OpenCloseFileTest.m');
-        disp(table(results)); assertSuccess(results);"
-    rules:
-# This test should always run when merging to main
-# And be available for manual running on any push
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
-        when: always
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
-        when: manual
-    allow_failure: true
+  variables:
+    VERSION: "R2025a"
+  tags:
+    - training
+    - windows
+  stage: release
+  script: 
+    - *setup_matlab_windows
+    - matlab "proj = openProject(pwd); 
+      addpath(proj.RootFolder+'/InternalFiles/Tests/CI');
+      results = runtests('OpenCloseFileTest.m');
+      disp(table(results)); assertSuccess(results);"
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      when: always
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
+      when: manual
+  allow_failure: true
 
 release-testing:
-    tags:
-      - matlab
-    stage: release
-    script: 
-      - matlab -batch "proj = openProject(pwd); 
-        cd ..;
-        addpath(genpath(fullfile('utilities','TestingResources')));
-        addpath(genpath(fullfile('utilities','Tools')));
-        runCMTests"
-    rules:
-# This test should always run when merging to main
-# And be available for manual running on any push
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
-        when: always
-      - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
-        when: manual
-    allow_failure: true
+  variables:
+    VERSION: "R2025a"
+  tags:
+    - training
+    - windows
+  stage: release
+  script: 
+    - matlab "proj = openProject(pwd); 
+      cd ..;
+      addpath(genpath(fullfile('utilities','TestingResources')));
+      addpath(genpath(fullfile('utilities','Tools')));
+      runCMTests"
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      when: always
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH
+      when: manual
+  allow_failure: true
