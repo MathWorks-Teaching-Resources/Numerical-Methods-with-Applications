@@ -55,7 +55,6 @@ ci_utilities/
 # Generated files
 Data/allStorms.mat
 Data/allStorms.csv
-Data/myStorm.mat
 Scripts/myLakeData.mat
 myLakeData.mat
 myModernLakeData.mat
