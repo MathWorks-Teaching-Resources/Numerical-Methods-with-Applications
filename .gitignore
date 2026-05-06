@@ -51,3 +51,10 @@ Utilities/ProjectSettings.mat
 public/
 .buildtool/
 ci_utilities/
+
+# Generated files
+Data/allStorms.mat
+Data/allStorms.csv
+Scripts/myLakeData.mat
+myLakeData.mat
+myModernLakeData.mat
