@@ -1,12 +1,11 @@
 %  Pre-run script for TrackStorms.mlx
 % ---- Known Issues     -----
-KnownIssuesID = "";
+KnownIssuesID = "MATLAB:FileIO:InvalidFid";
 % ---- Pre-run commands -----
- 
-LoadStormData = "Load storm data";
 
-if ~exist("allStorms.mat","file")
-    copyfile("myStorm.mat",fullfile(currentProject().RootFolder,"Data","allStorms.mat")) 
+try
+    LoadStormData
+catch
 end
 
 pause = @(t)MyPause(t);

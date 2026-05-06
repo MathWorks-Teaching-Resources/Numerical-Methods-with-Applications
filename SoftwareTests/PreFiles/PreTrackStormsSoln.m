@@ -2,4 +2,8 @@
 % ---- Known Issues     -----
 KnownIssuesID = "";
 % ---- Pre-run commands -----
- 
+
+pause = @(t)MyPause(t);
+
+function MyPause(t)
+end
