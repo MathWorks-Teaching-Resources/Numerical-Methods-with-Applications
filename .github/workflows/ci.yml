@@ -171,11 +171,14 @@ jobs:
 
       # Deploy reports to GitHub pages
       - name: Setup Pages
+        if: ${{ always() && github.event_name != 'pull_request' }}
         uses: actions/configure-pages@v5
       - name: Upload pages artifact
+        if: ${{ always() && github.event_name != 'pull_request' }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
       - name: Deploy to GitHub Pages
+        if: ${{ always() && github.event_name != 'pull_request' }}
         id: deployment
         uses: actions/deploy-pages@v4
