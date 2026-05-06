@@ -5,7 +5,7 @@ Learn methods for interpolation, numerical integration and derivation, and finit
 
 [![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/111490-numerical-methods-with-applications) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=README.mlx)
 
-![MATLAB Versions Tested](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FMathWorks-Teaching-Resources%2FNumerical-Methods-with-Applications%2Frelease%2FImages%2FTestedWith.json)
+[![MATLAB Versions Tested](https://img.shields.io/endpoint?url=https://mathworks-teaching-resources.github.io/Numerical-Methods-with-Applications/TestedWith.json)](https://MathWorks-Teaching-Resources.github.io/Numerical-Methods-with-Applications)
 
 **Curriculum Module**
 
