@@ -1,7 +1,6 @@
 # List of untracked files to ignore
 
 # Autosave files
-*/*.asv
 *.asv
 *.m~
 *.autosave
@@ -45,12 +44,10 @@ codegen/
 # Cache files
 *.slxc
 
-# Project settings and other local data
+# Project settings
 Utilities/ProjectSettings.mat
-Data/allStorms.mat
-Data/allStorms.csv
-Scripts/myLakeData.mat
-myLakeData.mat
 
-# GitLab page folder
+# Testing and CI related artifact
 public/
+.buildtool/
+ci_utilities/
