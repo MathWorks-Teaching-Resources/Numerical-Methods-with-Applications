@@ -1,4 +1,4 @@
-%  Pre-run script for MeasureLakeAreaSoln.mlx
+%  Pre-run script for MeasureLakeAreaSoln.m
 % ---- Known Issues     -----
 KnownIssuesID = "";
 % ---- Pre-run commands -----
@@ -12,6 +12,7 @@ openfig = @(in)figure;
 
 IdentifyLakeShape = @()LoadModernData();
 MeasureGeoScale = @()LoadGeoScale();
+% <matlab:ShareFeedback Share your feedback>
 
 function roi = LoadModernData
 load myModernLakeData.mat modLakeLat modLakeLong

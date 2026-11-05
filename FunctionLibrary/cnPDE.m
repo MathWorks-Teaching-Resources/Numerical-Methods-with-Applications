@@ -54,7 +54,7 @@ scale = (yUpper-yLower)*0.05;
 ax.YLim = [yLower-scale yUpper+scale];
 
 % These values generate well-sized y limits for the example function 
-% used in partialDiffEqs.mlx 
+% used in NumericalPDEs.m 
 ylim([-4 1.5]);
 title("Solving $\frac{\partial u}{\partial t} = \gamma \frac{\partial^2 u}{\partial x^2}$","Interpreter","latex")
 subtitle("$t=0$","Interpreter","latex")

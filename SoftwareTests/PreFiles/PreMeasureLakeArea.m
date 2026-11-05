@@ -1,4 +1,4 @@
-%  Pre-run script for MeasureLakeArea.mlx
+%  Pre-run script for MeasureLakeArea.m
 % ---- Known Issues     -----
 KnownIssuesID = "";
 % ---- Pre-run commands -----
@@ -10,3 +10,4 @@ y = lakeY([idx:end 1:idx-1]);
 p.Position = [x y];
 drawpolygon = p; 
 openfig = @(in)figure;
+% <matlab:ShareFeedback Share your feedback>

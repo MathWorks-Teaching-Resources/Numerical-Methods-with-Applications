@@ -44,15 +44,15 @@ codegen/
 # Cache files
 *.slxc
 
-# Project settings
-Utilities/ProjectSettings.mat
-
 # Testing and CI related artifact
 public/
 .buildtool/
 ci_utilities/
 
-# Generated files
+# AI Tooling
+.playwright-mcp/
+
+# Module-generated data
 Data/allStorms.mat
 Data/allStorms.csv
 Scripts/myLakeData.mat

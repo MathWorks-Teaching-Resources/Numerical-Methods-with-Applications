@@ -1,4 +1,4 @@
-%  Pre-run script for NumericalODEsSoln.mlx
+%  Pre-run script for NumericalODEsSoln.m
 % ---- Known Issues     -----
 KnownIssuesID = "";
 % ---- Pre-run commands -----
@@ -7,6 +7,7 @@ addpath(fullfile(currentProject().RootFolder,"InstructorResources","Solutions","
 
 open = @(str)MyOpen(str);
 edit = @(str)MyOpen(str);
+% <matlab:ShareFeedback Share your feedback>
 
 function MyOpen(str)
 assert(exist(str,"file"))

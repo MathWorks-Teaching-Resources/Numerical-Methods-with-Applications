@@ -7,7 +7,7 @@ stages:
 test-matrix:
   parallel:
     matrix:
-      - VERSION: [R2025b,R2026a]
+      - VERSION: [R2026a,R2026b]
   tags:
     - training  
     - windows

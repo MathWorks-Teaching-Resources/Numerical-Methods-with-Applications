@@ -1,4 +1,4 @@
-%  Pre-run script for TrackStorms.mlx
+%  Pre-run script for TrackStorms.m
 % ---- Known Issues     -----
 KnownIssuesID = "MATLAB:FileIO:InvalidFid";
 % ---- Pre-run commands -----
@@ -9,6 +9,7 @@ catch
 end
 
 pause = @(t)MyPause(t);
+% <matlab:ShareFeedback Share your feedback>
 
 function MyPause(t)
 end

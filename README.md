@@ -3,13 +3,15 @@
 
 Learn methods for interpolation, numerical integration and derivation, and finite difference methods for differential equations.
 
-[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/111490-numerical-methods-with-applications) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=README.mlx)
+[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/111490-numerical-methods-with-applications) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=README.m)
 
 [![MATLAB Versions Tested](https://img.shields.io/endpoint?url=https://mathworks-teaching-resources.github.io/Numerical-Methods-with-Applications/TestedWith.json)](https://MathWorks-Teaching-Resources.github.io/Numerical-Methods-with-Applications)
 
 **Curriculum Module**
 
-_Created with R2021b. Compatible with R2021b and later releases._
+_Created with R2021b. The current plain-text live scripts require R2025a or newer._
+
+MATLAB R2024b or older: download the [legacy MLX release](https://github.com/MathWorks-Teaching-Resources/Numerical-Methods-with-Applications/releases/tag/mlx). This version uses plain-text live scripts and requires MATLAB R2025a or newer.
 
 # Information
 
@@ -38,7 +40,7 @@ Use the [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https:/
 
 ### **On Desktop:**
 
-Download or clone this repository. Open MATLAB, navigate to the folder containing these scripts and double\-click on [NumerialMethods.prj](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj). It will add the appropriate files to your MATLAB path and open an app that asks you where you would like to start. 
+Download or clone this repository. Open MATLAB, navigate to the folder containing these scripts and double\-click on [NumericalMethods.prj](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj). It will add the appropriate files to your MATLAB path and open an app that asks you where you would like to start. 
 
 
 Ensure you have all the required products (listed below) installed. If you need to include a product, add it using the Add\-On Explorer. To install an add\-on, go to the **Home** tab and select  <img src="Images/AddOnsIcon.png" width="16" alt="AddOnsIcon.png"> **Add-Ons** > **Get Add-Ons**. 
@@ -48,35 +50,35 @@ Ensure you have all the required products (listed below) installed. If you need 
 
 MATLAB® is used throughout. Tools from the Symbolic Math Toolbox™ are used frequently as well. 
 
--  <samp>drawpolygon</samp> from Image Processing and Computer Vision™ is used to create datasets in <samp>Hand.mlx</samp> and <samp>MeasureLakeArea.mlx</samp> 
--  Statistics and Machine Learning Toolbox™ and the Curve Fitting Toolbox™ are used in <samp>Interpolation.mlx</samp> 
--  <samp>geoplayer</samp> from Automated Driving Toolbox™ is used in TrackStorms.mlx to create elegant visualizations, but pedagogically similar plots are demonstrated with geoplot as well. 
+-  <samp>drawpolygon</samp> from Image Processing and Computer Vision™ is used to create datasets in <samp>Hand.m</samp> and <samp>MeasureLakeArea.m</samp> 
+-  Statistics and Machine Learning Toolbox™ and the Curve Fitting Toolbox™ are used in <samp>Interpolation.m</samp> 
+-  <samp>geoplayer</samp> from Automated Driving Toolbox™ is used in TrackStorms.m to create elegant visualizations, but pedagogically similar plots are demonstrated with geoplot as well. 
 
 # Scripts
-## [**Interpolation.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Interpolation.mlx) 
+## [**Interpolation.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/Interpolation.m) 
 | <img src="Images/hand.png" width="171" alt="hand.png"> <br>  | **In this script, students will...** <br> <br>-  define interpolation and explain how it is different from regression and extrapolation <br> <br>-  demonstrate multiple solutions to an interpolation problem, even when interpolating by polynomials <br> <br>-  implement three different interpolation functions <br>  | **Applications** <br> <br>-  Drawing a smooth rendition of their hand <br> <br>-  Tracking the path of a cyclone <br> **Scaffolded Template Scripts** <br> [<samp>linInterp.m</samp>](./FunctionLibrary/linInterp.m) <br> [<samp>pcHInterp.m</samp>](./FunctionLibrary/pcHInterp.m) <br> [<samp>pcSpline.m</samp>](./FunctionLibrary/pcSpline.m) <br>   |
 | :-- | :-- | :-- |
 
 ## Supporting Scripts
--  [<samp>Hand.mlx</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Hand.mlx) 
--  [<samp>TrackStorms.mlx</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=TrackStorms.mlx) 
-## [**NumericalDerivatives.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalDerivatives.mlx) 
+-  [<samp>Hand.m</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/Hand.m) 
+-  [<samp>TrackStorms.m</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/TrackStorms.m) 
+## [**NumericalDerivatives.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/NumericalDerivatives.m) 
 | <img src="Images/NoisyDerivative.png" width="171" alt="NoisyDerivative.png"> <br>  | **In this script, students will...** <br> <br>-  determine numerical derivative approximations formulas <br> <br>-  use Taylor's theorem to calculate the order of the error for a numerical approximation to a derivative <br> <br>-  demonstrate how numerical derivatives can magnify approximation errors <br>  | **Applications** <br> <br>-  Numerical solutions to differential equations <br>   |
 | :-- | :-- | :-- |
 
-## [**NumericalIntegration.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalIntegration.mlx) 
+## [**NumericalIntegration.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/NumericalIntegration.m) 
 | <img src="Images/BakerLakeSR.png" width="171" alt="BakerLakeSR.png"> <br>  | **In this script, students will...** <br> <br>-  implement Euler's method, Gaussian 2\-point approximations, and Simpson's rule for numerical integration <br> <br>-  explain why higher\-order approximations may not be appropriate in applications <br>  | **Applications** <br> <br>-  Measure the area of a lake <br> **Scaffolded Template Scripts** <br> [<samp>eulerMethod.m</samp>](./FunctionLibrary/eulerMethod.m) <br> [<samp>gauss2pt.m</samp>](./FunctionLibrary/gauss2pt.m) <br> [<samp>simpsonsRule.m</samp>](./FunctionLibrary/simpsonsRule.m) <br>   |
 | :-- | :-- | :-- |
 
 ## Supporting Scripts
--  [<samp>MeasureLakeArea.mlx</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=MeasureLakeArea.mlx) 
-## [**NumericalODEs.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalODEs.mlx) 
+-  [<samp>MeasureLakeArea.m</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/MeasureLakeArea.m) 
+## [**NumericalODEs.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/NumericalODEs.m) 
 | <img src="Images/image_6.png" width="171" alt="image_6.png"> <br>  | **In this script, students will...** <br> <br>-  implement Euler's method for first\-order initial value problems <br> <br>-  calculate the error of their numerical solution <br> <br>-  implement a trapezoidal method <br> <br>-  implement a four\-step Runge\-Kutta method <br> <br>-  compare results with the built\-in MATLAB solver <samp>ode45</samp> <br>  | **Applications** <br> <br>-  Model a pendulum with increasingly realistic assumptions <br> **Scaffolded Template Scripts** <br> [<samp>eulerMethodDE.m</samp>](./FunctionLibrary/eulerMethodDE.m) <br> [<samp>rk4.m</samp>](./FunctionLibrary/rk4.m) <br>   |
 | :-- | :-- | :-- |
 
 ## Supporting Scripts
--  [<samp>PendulumModels.mlx</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=PendulumModels.mlx) 
-## [**NumericalPDEs.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=NumericalPDEs.mlx) 
+-  [<samp>PendulumModels.m</samp>](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/PendulumModels.m) 
+## [**NumericalPDEs.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Numerical-Methods-with-Applications&project=NumericalMethods.prj&file=Scripts/NumericalPDEs.m) 
 | <img src="Images/heatSoln.gif" width="171" alt="heatSoln.gif"> <br>  | **In this script, students will...** <br> <br>-  identify errors from discretizing the problem and from discretizing the method and choose appropriate parameters to minimize overall error <br> <br>-  explain the importance of stability when choosing a numerical method <br> <br>-  implement explicit, implicit, and Crank\-Nicolson methods to solve a 1\-D heat equation <br>  | **Applications** <br> <br>-  Solve a heat equation <br> **Scaffolded Template Scripts** <br> [<samp>explicitPDE.m</samp>](./FunctionLibrary/explicitPDE.m) <br> [<samp>implicitPDE.m</samp>](./FunctionLibrary/implicitPDE.m) <br> [<samp>cnPDE.m</samp>](./FunctionLibrary/cnPDE.m) <br>   |
 | :-- | :-- | :-- |
 
@@ -101,7 +103,7 @@ Or feel free to explore our other [modular courseware content](https://www.mathw
 Looking for more? Find an issue? Have a suggestion? Please contact the [MathWorks Educator Content Development Team](mailto:%20onlineteaching@mathworks.com). If you want to contribute directly to this project, you can find information about how to do so in the [CONTRIBUTING.md](https://github.com/MathWorks-Teaching-Resources/Numerical-Methods-with-Applications/blob/release/CONTRIBUTING.md) page on GitHub.
 
 
- *©* Copyright 2024 The MathWorks™, Inc
+ *©* Copyright 2024-2026 The MathWorks™, Inc
 
 
 

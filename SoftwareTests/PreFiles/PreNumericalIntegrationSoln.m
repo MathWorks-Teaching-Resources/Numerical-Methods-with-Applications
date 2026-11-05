@@ -1,10 +1,11 @@
-%  Pre-run script for NumericalIntegrationSoln.mlx
+%  Pre-run script for NumericalIntegrationSoln.m
 % ---- Known Issues     -----
 KnownIssuesID = "";
 % ---- Pre-run commands -----
 addpath(fullfile(currentProject().RootFolder,"InstructorResources","Solutions","FunctionLibrarySolutions"))
 
 open = @(str)MyOpen(str);
+% <matlab:ShareFeedback Share your feedback>
 
 function MyOpen(str)
 assert(exist(str,"file"))
