@@ -79,14 +79,12 @@ jobs:
         Releases: [R2026a, R2026b]
     runs-on: ubuntu-latest
     env:
-      MATLAB_PRODUCTS: # Simulink Simscape Symbolic_Math_Toolbox
-      # List required products above in the format shown (and uncomment them)
-      # Common products:
-      # Simulink
-      # Simscape
-      # Statistics_and_Machine_Learning_Toolbox
-      # Symbolic_Math_Toolbox
-      # Deep_Learning_Toolbox
+      MATLAB_PRODUCTS: >
+        Symbolic_Math_Toolbox
+        Image_Processing_Toolbox
+        Statistics_and_Machine_Learning_Toolbox
+        Curve_Fitting_Toolbox
+        Automated_Driving_Toolbox
       LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libstdc++.so.6
     steps:
       # Checks-out your repository
